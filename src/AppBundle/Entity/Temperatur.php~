@@ -1,0 +1,127 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Temperatur
+ *
+ * @ORM\Table(name="temperatur")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TemperaturRepository")
+ */
+class Temperatur
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="min", type="string", length=255)
+     */
+    private $min;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="max", type="string", length=255)
+     */
+    private $max;
+
+    /**
+     * @var
+     * @ORM\ManyToOne(targetEntity="City", inversedBy="temperaturs")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $city;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set min
+     *
+     * @param string $min
+     *
+     * @return Temperatur
+     */
+    public function setMin($min)
+    {
+        $this->min = $min;
+
+        return $this;
+    }
+
+    /**
+     * Get min
+     *
+     * @return string
+     */
+    public function getMin()
+    {
+        return $this->min;
+    }
+
+    /**
+     * Set max
+     *
+     * @param string $max
+     *
+     * @return Temperatur
+     */
+    public function setMax($max)
+    {
+        $this->max = $max;
+
+        return $this;
+    }
+
+    /**
+     * Get max
+     *
+     * @return string
+     */
+    public function getMax()
+    {
+        return $this->max;
+    }
+
+    /**
+     * Set city
+     *
+     * @param \AppBundle\Entity\City $city
+     *
+     * @return Temperatur
+     */
+    public function setCity(\AppBundle\Entity\City $city = null)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return \AppBundle\Entity\City
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+}
