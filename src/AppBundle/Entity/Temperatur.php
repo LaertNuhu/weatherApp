@@ -37,6 +37,34 @@ class Temperatur
 
     /**
      * @var
+     *
+     * @ORM\Column(name="current_temp", type="string", length=255)
+     */
+    private $currentTemp;
+
+    /**
+     * @var
+     *
+     * @ORM\Column(name="humidity", type="string", length=255)
+     */
+    private $humidity;
+
+    /**
+     * @var
+     *
+     * @ORM\Column(name="icon", type="string", length=255)
+     */
+    private $icon;
+
+    /**
+     * @var
+     *
+     * @ORM\Column(name="wind_speed", type="string", length=255)
+     */
+    private $windSpeed;
+
+    /**
+     * @var
      * @ORM\ManyToOne(targetEntity="City", inversedBy="temperaturs")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
@@ -123,5 +151,101 @@ class Temperatur
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set currentTemp
+     *
+     * @param string $currentTemp
+     *
+     * @return Temperatur
+     */
+    public function setCurrentTemp($currentTemp)
+    {
+        $this->currentTemp = $currentTemp;
+
+        return $this;
+    }
+
+    /**
+     * Get currentTemp
+     *
+     * @return string
+     */
+    public function getCurrentTemp()
+    {
+        return $this->currentTemp;
+    }
+
+    /**
+     * Set humidity
+     *
+     * @param string $humidity
+     *
+     * @return Temperatur
+     */
+    public function setHumidity($humidity)
+    {
+        $this->humidity = $humidity;
+
+        return $this;
+    }
+
+    /**
+     * Get humidity
+     *
+     * @return string
+     */
+    public function getHumidity()
+    {
+        return $this->humidity;
+    }
+
+    /**
+     * Set icon
+     *
+     * @param string $icon
+     *
+     * @return Temperatur
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * Set windSpeed
+     *
+     * @param string $windSpeed
+     *
+     * @return Temperatur
+     */
+    public function setWindSpeed($windSpeed)
+    {
+        $this->windSpeed = $windSpeed;
+
+        return $this;
+    }
+
+    /**
+     * Get windSpeed
+     *
+     * @return string
+     */
+    public function getWindSpeed()
+    {
+        return $this->windSpeed;
     }
 }

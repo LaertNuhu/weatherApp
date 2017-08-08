@@ -12,27 +12,35 @@ use AppBundle\Entity\Temperatur;
 
 class ApiCommand extends ContainerAwareCommand
 {
+    /**
+     *
+     */
     protected function configure()
     {
         $this
             // the name of the command (the part after "bin/console")
             ->setName('app:run_api')
-
             // the short description shown while running "php bin/console list"
             ->setDescription('Sends requests to an api and saves results on db.')
             ->addArgument('interval', InputArgument::REQUIRED, 'In which interval will the api request be sended')
         ;
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         while (true){
             $this->cities();
             sleep($input->getArgument("interval"));
         }
     }
 
+    /**
+     *
+     */
     protected function cities(){
         $manager = $this->getContainer()->get('doctrine');
         $cities = $manager->getRepository('AppBundle:City')->findAll();
@@ -45,6 +53,11 @@ class ApiCommand extends ContainerAwareCommand
             $temperatures = new Temperatur();
             $temperatures->setMax($data["main"]["temp_max"]);
             $temperatures->setMin($data["main"]["temp_min"]);
+            $temperatures->setCurrentTemp($data["main"]["temp"]);
+            $temperatures->setHumidity($data["main"]["humidity"]);
+            $temperatures->setIcon("http://openweathermap.org/img/w/".$data["weather"][0]["icon"].".png");
+            $temperatures->setWindSpeed($data["wind"]["speed"]);
+
             $temperatures->setCity($city);
             $city->addTemperatur($temperatures);
 
