@@ -10,10 +10,16 @@ use Symfony\Component\Console\Input\InputArgument;
 use GuzzleHttp\Client;
 use AppBundle\Entity\Temperatur;
 
+/**
+ * Class ApiCommand -> can be called on terminal via php bin/console app:run_api
+ *
+ * @package AppBundle\Command
+ */
 class ApiCommand extends ContainerAwareCommand
 {
     /**
-     *
+     * Intial configuration for the command
+     * Name and description are given
      */
     protected function configure()
     {
@@ -22,32 +28,39 @@ class ApiCommand extends ContainerAwareCommand
             ->setName('app:run_api')
             // the short description shown while running "php bin/console list"
             ->setDescription('Sends requests to an api and saves results on db.')
-            ->addArgument('interval', InputArgument::REQUIRED, 'In which interval will the api request be sended')
         ;
     }
 
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
+     * Makes the executing of the command possible
+     *
+     * @param  InputInterface  $input  takes user input
+     * @param  OutputInterface $output
+     * @return int|null|void
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        while (true){
-            $this->cities();
-            sleep($input->getArgument("interval"));
-        }
+        $this->cities();
+        sleep(10);
     }
 
     /**
-     *
+     * Calls the api for every city and adds data in the databank
      */
-    protected function cities(){
+    protected function cities()
+    {
         $manager = $this->getContainer()->get('doctrine');
         $cities = $manager->getRepository('AppBundle:City')->findAll();
-
-        foreach ($cities as $city){
+        foreach ($cities as $city) {
             $client = new Client();
-            $res = $client->request('GET','http://api.openweathermap.org/data/2.5/weather?q='.$city->getName().'&units=metric&appid=18dfe764b05dc2bd3918f4a11980f3b3');
+            $res = $client->
+                    request(
+                        'GET',
+                        'http://api.openweathermap.org/data/2.5/weather?q='
+                        .$city->getName().'&units='
+                        .$this->getContainer()->getParameter('units')[0].'&appid='
+                        .$this->getContainer()->getParameter('open_weather_api')
+                    );
             $data = json_decode($res->getBody()->getContents(), true);
 
             $temperatures = new Temperatur();

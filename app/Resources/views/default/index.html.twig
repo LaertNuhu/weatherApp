@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
+
+{% block title %} Home {% endblock %}
 {% block body %}
     <div class="container">
         <div class="row">
             <div class="col-md-offset-4 col-md-4">
                 <div class="well">
-                    <h5 style="text-align: center; margin: 2pc 0">Verfügbare Wetter-Data für:</h5>
+                    <div class="blue">
+                        <h5 style="text-align: center;">Available weather data for:</h5>
+                    </div>
                     {% if cities is defined %}
                         <table class="table">
                             {% for city in cities %}
@@ -18,13 +22,11 @@
                                     </td>
                                 </tr>
                             {% endfor %}
-                            <tr style="margin-top: 2pc">
-                                <td></td>
-                                <td style="width: 33%"><a style="width: 100%" href="/search"
-                                                          class="btn btn-primary btn-xs">Search </a></td>
-                                <td></td>
-                            </tr>
+
+
                         </table>
+                        <hr>
+                        <a class="search" style="text-align: center;display: block" href="/search">Search </a>
                     {% endif %}
 
                 </div>

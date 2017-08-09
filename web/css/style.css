@@ -1,0 +1,39 @@
+.well{
+    background: #fff;
+    padding: 0 !important;
+    border-radius: 10px;
+    margin-top:4pc;
+}
+a{
+    color: #7d7d7d;
+}
+form{
+    padding: 10px;
+    margin-top: -20px;
+}
+.blue{
+    background: #049fce;
+    padding: 10px;
+    color:#fff;
+    border-radius:10px 10px 0 0 ;
+    margin-top: 0;
+}
+.table{
+    margin-bottom: 2px;
+}
+hr{
+    margin: 0;
+}
+.search{
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+    background: #049fce;
+    color:#fff;
+}
+.search:hover{
+    background: #04779F;
+    color: #fff;
+}
+a:hover{
+    text-decoration: none;
+}
